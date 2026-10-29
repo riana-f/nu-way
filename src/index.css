@@ -1,0 +1,11 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: none;
+  text-align: left;
+}
+
+body {
+  background: #12171D;
+}
