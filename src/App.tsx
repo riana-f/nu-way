@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 
 // ─── Minor Database ────────────────────────────────────────────────────────
@@ -26,12 +25,13 @@ const NU_MINORS = [
   { id: "geosciences", name: "Geosciences", college: "COS", totalCredits: 26, requirements: [{ code: "ENVR 1200", name: "Dynamic Earth", credits: 4 }, { code: "ENVR 1201", name: "Lab for ENVR 1200", credits: 1 }, { code: "ENVR 2200", name: "Earth's Changing Cycles", credits: 4 }, { code: "ENVR 2310", name: "Earth Materials", credits: 4 }, { code: "ENVR 2311", name: "Lab for Earth Materials", credits: 1 }, { code: "ENVR 3300", name: "Geographic Information Systems", credits: 4 }, { code: "ENVR 3200", name: "Water Resources", credits: 4 }] },
   { id: "linguistics", name: "Linguistics", college: "COS", totalCredits: 20, requirements: [{ code: "LING 1150", name: "Introduction to Linguistics", credits: 4 }, { code: "LING 2350", name: "Linguistic Analysis", credits: 4 }, { code: "LING 3150", name: "Field Linguistics", credits: 4 }, { code: "LING 3412", name: "Language and Culture", credits: 4 }, { code: "LING 3250", name: "Discourse Analysis", credits: 4 }] },
   { id: "marine-sciences", name: "Marine Sciences", college: "COS", totalCredits: 22, requirements: [{ code: "EEMB 1101", name: "Foundations in Ecology and Evolutionary Biology", credits: 4 }, { code: "EEMB 1102", name: "Lab for EEMB 1101", credits: 1 }, { code: "ENVR 3600", name: "Oceanography", credits: 4 }, { code: "ENVR 2500", name: "Biostatistics", credits: 4 }, { code: "EEMB 2700", name: "Marine Biology", credits: 4 }, { code: "EEMB 5510", name: "New England Marine Biomes", credits: 4 }] },
-  { id: "math", name: "Mathematics", college: "COS", totalCredits: 24, requirements: [{ code: "MATH 1341", name: "Calculus 1 for Science and Engineering", credits: 4 }, { code: "MATH 1342", name: "Calculus 2 for Science and Engineering", credits: 4 }, { code: "MATH 2321", name: "Calculus 3 for Science and Engineering", credits: 4 }, { code: "MATH 2331", name: "Linear Algebra", credits: 4 }, { code: "MATH 3081", name: "Probability & Statistics", credits: 4 }, { code: "MATH 3175", name: "Group Theory", credits: 4 }] },
+  { id: "math", name: "Mathematics", college: "COS", totalCredits: 24, requirements: [{ code: "MATH 1341", name: "Calculus 1 for Science and Engineering", credits: 4, alts: ["MATH 1251"] }, { code: "MATH 1342", name: "Calculus 2 for Science and Engineering", credits: 4, alts: ["MATH 1252"] }, { code: "Elective", name: "Intermediate math (choose 2 of 3)", credits: 4, alts: ["MATH 2321", "MATH 2341", "MATH 2331"] }, { code: "Elective", name: "Intermediate math (choose 2 of 3)", credits: 4, alts: ["MATH 2321", "MATH 2341", "MATH 2331"] }, { code: "Elective", name: "Math elective, MATH 3001–4699 (choose 2)", credits: 4, alts: ["MATH 3001-4699"] }, { code: "Elective", name: "Math elective, MATH 3001–4699 (choose 2)", credits: 4, alts: ["MATH 3001-4699"] }] },
   { id: "network-sci", name: "Network Science", college: "COS", totalCredits: 20, requirements: [{ code: "PHYS 1125", name: "Introduction to Network Science", credits: 4 }, { code: "MATH 3545", name: "Introduction to Graph Theory", credits: 4 }, { code: "CS 2000", name: "Introduction to Program Design", credits: 4 }, { code: "CS 2001", name: "Lab for CS 2000", credits: 1 }, { code: "INSH 5304", name: "Social Network Analysis", credits: 4 }] },
   { id: "physics", name: "Physics", college: "COS", totalCredits: 22, requirements: [{ code: "PHYS 1151", name: "Physics for Engineering 1", credits: 4 }, { code: "PHYS 1152", name: "Lab for Physics 1", credits: 1 }, { code: "PHYS 1155", name: "Physics for Engineering 2", credits: 4 }, { code: "PHYS 1156", name: "Lab for Physics 2", credits: 1 }, { code: "PHYS 2303", name: "Modern Physics", credits: 4 }, { code: "PHYS 3302", name: "Electricity and Magnetism", credits: 4 }, { code: "PHYS 3600", name: "Theoretical Mechanics", credits: 4 }] },
   { id: "psychology-cos", name: "Psychology", college: "COS", totalCredits: 20, requirements: [{ code: "PSYC 1101", name: "Foundations of Psychology", credits: 4 }, { code: "PSYC 3402", name: "Social Psychology", credits: 4 }, { code: "PSYC 3458", name: "Biological Psychology", credits: 4 }, { code: "PSYC 3466", name: "Cognition", credits: 4 }, { code: "PSYC 3404", name: "Developmental Psychology", credits: 4 }] },
 
-  { id: "sci-writing", name: "Science Writing", college: "COS", totalCredits: 20, requirements: [{ code: "BIOL 1107", name: "Foundations of Biology", credits: 4 }, { code: "ENGL 2650", name: "Science Writing: Origins, Ethics, and Emerging Genres", credits: 4 }, { code: "JRNL 3650", name: "Science Writing", credits: 4 }, { code: "JRNL 3700", name: "Data Storytelling", credits: 4 }, { code: "COMM 1125", name: "Science, Communication, and Society", credits: 4 }] },
+  { id: "sci-writing", name: "Science Writing", college: "COS", totalCredits: 20, requirements: [{ code: "BIOL 1111", name: "Introductory science course (choose 1)", credits: 4, alts: ["BIOL 1107", "CHEM 1151", "CHEM 1161", "CHEM 1214", "EEMB 1101", "ENVR 1400", "MATH 1242", "MATH 1342", "PHYS 1155", "PHYS 1165", "PHYS 1175", "PSYC 1101"] }, { code: "Elective", name: "Intermediate/advanced science course (choose 1)", credits: 4, alts: ["BIOL 2301-5999", "CHEM 2311-5999", "EEMB 2400-5999", "ENVR 2310-5999", "MATH 2280-5999", "PHYS 2303-5999", "PSYC 2290-5999"] }, { code: "COMM 1125", name: "Science, Communication, and Society (or ENGL 2650)", credits: 4, alts: ["ENGL 2650"] }, { code: "Elective", name: "Science writing elective (choose 2 of 7)", credits: 4, alts: ["COMM 3500", "ENGL 2620", "ENGL 2780", "ENGL 3340", "ENGL 3700", "JRNL 3650", "JRNL 3700"] }, { code: "Elective", name: "Science writing elective (choose 2 of 7)", credits: 4, alts: ["COMM 3500", "ENGL 2620", "ENGL 2780", "ENGL 3340", "ENGL 3700", "JRNL 3650", "JRNL 3700"] }] },
+  { id: "bioethics", name: "Bioethics", college: "COS", totalCredits: 22, restrictedMajors: ["biology"], requirements: [{ code: "BIOL 1111", name: "General Biology 1 (with BIOL 1112 lab)", credits: 5 }, { code: "BIOL 2301", name: "Genetics and Molecular Biology (with BIOL 2302 lab)", credits: 5 }, { code: "BIOL 2329", name: "Bioethics", credits: 4 }, { code: "Elective", name: "Intermediate biological ethics (choose 1 of 4)", credits: 4, alts: ["BIOL 3419", "BIOL 3423", "NRSG 2150", "PHIL 3065"] }, { code: "Elective", name: "Biological or general ethics elective (choose 1)", credits: 4, alts: ["BIOL 3419", "BIOL 3423", "NRSG 2150", "PHIL 3065", "INSH 1300", "INSH 2300", "PHIL 1102", "PHIL 1145", "PHIL 1165", "PHIL 1180", "PHIL 1185", "PHIL 1195"] }] },
 
   // ── D'Amore-McKim School of Business (all 17) ─────────────────────────
   { id: "acct-advisory", name: "Accounting and Advisory Services", college: "D'Amore-McKim", totalCredits: 16, requirements: [{ code: "ACCT 1201", name: "Financial Accounting and Reporting", credits: 4 }, { code: "ACCT 2301", name: "Profit Analysis for Managers", credits: 4 }, { code: "ACCT 3301", name: "Financial Reporting and Analysis", credits: 4 }, { code: "ACCT 3302", name: "Auditing and Advisory Services", credits: 4 }] },
@@ -112,7 +112,6 @@ const NU_MINORS = [
   { id: "sports-media", name: "Sports, Media, and Communication", college: "CAMD", totalCredits: 16, requirements: [{ code: "COMM 1101", name: "Communication Fundamentals", credits: 4 }, { code: "COMM 2120", name: "Sports Communication", credits: 4 }, { code: "MSCR 2310", name: "Television and Media Culture", credits: 4 }, { code: "COMM 3120", name: "Advanced Sports Communication", credits: 4 }] },
 
   // ─ Journalism minors ─
-  { id: "journalism", name: "Journalism", college: "CAMD", totalCredits: 16, requirements: [{ code: "JRNL 1150", name: "Introduction to Journalism", credits: 4 }, { code: "JRNL 2200", name: "News Writing and Reporting", credits: 4 }, { code: "JRNL 3200", name: "Multimedia Journalism", credits: 4 }, { code: "JRNL 3650", name: "Science Writing", credits: 4 }] },
   { id: "science-comm", name: "Science Communication", college: "CAMD", totalCredits: 16, requirements: [{ code: "COMM 1125", name: "Science, Communication, and Society", credits: 4 }, { code: "JRNL 3650", name: "Science Writing", credits: 4 }, { code: "JRNL 3700", name: "Data Storytelling", credits: 4 }, { code: "COMM 3500", name: "Environmental Issues and the Media", credits: 4 }] },
 
   // ─ Music minors ─
@@ -136,7 +135,8 @@ const NU_MINORS = [
   { id: "creativity-theory", name: "Creativity in Theory and Practice", college: "CAMD", totalCredits: 16, requirements: [{ code: "ARTF 1122", name: "Foundation 2D Design", credits: 4 }, { code: "COMM 2310", name: "Media and Society", credits: 4 }, { code: "CAMD 3001", name: "Creativity in Theory", credits: 4 }, { code: "CAMD 3002", name: "Creativity in Practice", credits: 4 }] },
 
   // ── College of Engineering (COE) ─────────────────────────────────────────
-  { id: "electrical-eng", name: "Electrical and Computer Engineering", college: "COE", totalCredits: 20, requirements: [{ code: "EECE 2150", name: "Circuits and Signals", credits: 4 }, { code: "EECE 2160", name: "ECE Design", credits: 4 }, { code: "EECE 3324", name: "Electronics", credits: 4 }, { code: "EECE 3468", name: "Embedded Design", credits: 4 }, { code: "EECE 4792", name: "Senior Capstone", credits: 4 }] },
+  { id: "biomedical-eng", name: "Biomedical Engineering", college: "COE", totalCredits: 27, requirements: [{ code: "BIOL 1111", name: "General Biology 1 (with BIOL 1112 lab)", credits: 5 }, { code: "BIOL 2217", name: "Integrated Anatomy and Physiology 1 (with BIOL 2218 lab)", credits: 5 }, { code: "Elective", name: "Engineering research, directed study, or special topics (choose 1)", credits: 4, alts: ["EECE 4991", "EECE 4992", "EECE 5698"] }, { code: "EECE 4791", name: "Electrical and Computer Engineering Capstone 1", credits: 1 }, { code: "EECE 4792", name: "Electrical and Computer Engineering Capstone 2", credits: 4 }, { code: "Elective", name: "Biomedical elective (choose 2)", credits: 4, alts: ["BIOL 1113", "BIOL 2219", "BIOL 2299", "BIOL 2301", "BIOL 3405", "BIOL 4991", "BIOL 5581", "CHME 5630", "CHME 5699", "CIVE 7251", "EECE 4991", "EECE 4992", "EECE 5698", "IE 4522", "ME 5665", "PHYS 4621", "PHYS 4623", "PHYS 4651", "PHYS 4652", "PSYC 3452", "PSYC 3458"] }, { code: "Elective", name: "Biomedical elective (choose 2)", credits: 4, alts: ["BIOL 1113", "BIOL 2219", "BIOL 2299", "BIOL 2301", "BIOL 3405", "BIOL 4991", "BIOL 5581", "CHME 5630", "CHME 5699", "CIVE 7251", "EECE 4991", "EECE 4992", "EECE 5698", "IE 4522", "ME 5665", "PHYS 4621", "PHYS 4623", "PHYS 4651", "PHYS 4652", "PSYC 3452", "PSYC 3458"] }] },
+  { id: "comp-data-analytics", name: "Computational Data Analytics", college: "COE", totalCredits: 20, requirements: [{ code: "EECE 5642", name: "Data Visualization", credits: 4 }, { code: "EECE 5644", name: "Introduction to Machine Learning and Pattern Recognition", credits: 4 }, { code: "EECE 2140", name: "Computing Fundamentals for Engineers", credits: 4 }, { code: "Elective", name: "Probability and statistics (choose 1 of 6)", credits: 4, alts: ["BIOE 2365", "CIVE 3464", "EECE 3468", "IE 3412", "MATH 2280", "MATH 3081"] }, { code: "Elective", name: "Data analytics elective (choose 1 of 9)", credits: 4, alts: ["CS 3000", "CS 3200", "CS 5200", "EECE 2520", "EECE 2560", "EECE 4694", "EECE 5639", "IE 4515", "IE 5640"] }] },
   { id: "mechanical-eng", name: "Mechanical Engineering", college: "COE", totalCredits: 20, requirements: [{ code: "ME 2340", name: "Thermodynamics", credits: 4 }, { code: "ME 3460", name: "Fluid Mechanics", credits: 4 }, { code: "ME 3470", name: "Heat Transfer", credits: 4 }, { code: "MEIE 2600", name: "Engineering Mechanics", credits: 4 }, { code: "ME 4510", name: "Mechanical Design", credits: 4 }] },
   { id: "civil-eng", name: "Civil Engineering", college: "COE", totalCredits: 20, requirements: [{ code: "CE 2340", name: "Statics", credits: 4 }, { code: "CE 3460", name: "Structural Analysis", credits: 4 }, { code: "CE 3470", name: "Geotechnical Engineering", credits: 4 }, { code: "CE 3480", name: "Fluid Mechanics", credits: 4 }, { code: "CE 4500", name: "Civil Engineering Design", credits: 4 }] },
   { id: "materials-sci", name: "Materials Science and Engineering", college: "COE", totalCredits: 20, requirements: [{ code: "MATL 2350", name: "Materials Science", credits: 4 }, { code: "MATL 3450", name: "Mechanical Behavior of Materials", credits: 4 }, { code: "MATL 3460", name: "Electronic Properties", credits: 4 }, { code: "MATL 3470", name: "Materials Characterization", credits: 4 }, { code: "MATL 4500", name: "Materials Design", credits: 4 }] },
@@ -152,7 +152,7 @@ const NU_MINORS = [
   { id: "early-intervention", name: "Early Intervention", college: "Bouvé", totalCredits: 20, requirements: [{ code: "CAEP 5151", name: "Early Intervention: Infant and Toddler Development", credits: 4 }, { code: "SLPA 5152", name: "Early Intervention: Planning and Evaluating Services", credits: 4 }, { code: "CAEP 5153", name: "Early Intervention: Assessment and Intervention", credits: 4 }, { code: "SLPA 5154", name: "Early Intervention Practicum 1", credits: 4 }, { code: "SLPA 5155", name: "Early Intervention Practicum 2", credits: 4 }] },
   { id: "exercise-sci", name: "Exercise Science", college: "Bouvé", totalCredits: 20, requirements: [{ code: "EXSC 1120", name: "Introduction to Exercise, Fitness, and Health", credits: 4 }, { code: "BIOL 2217", name: "Anatomy and Physiology 1", credits: 4 }, { code: "BIOL 2219", name: "Anatomy and Physiology 2", credits: 4 }, { code: "EXSC 4500", name: "Exercise Physiology 1", credits: 4 }, { code: "EXSC 4501", name: "Lab for Exercise Physiology", credits: 1 }] },
   { id: "global-health", name: "Global Health", college: "Bouvé", totalCredits: 20, requirements: [{ code: "PHTH 1270", name: "Introduction to Global Health", credits: 4 }, { code: "PHTH 2350", name: "Community and Public Health", credits: 4 }, { code: "PHTH 2210", name: "Foundations of Biostatistics", credits: 4 }, { code: "PHTH 2515", name: "Social Determinants of Health", credits: 4 }, { code: "INTL 1101", name: "Globalization and International Affairs", credits: 4 }] },
-  { id: "healthcare-ops", name: "Healthcare System Operations", college: "Bouvé", totalCredits: 16, requirements: [{ code: "IE 5617", name: "Lean Concepts and Applications", credits: 4 }, { code: "IE 5400", name: "Healthcare Systems Modeling and Analysis", credits: 4 }, { code: "PHTH 1260", name: "The American Healthcare System", credits: 4 }, { code: "PHTH 4511", name: "Healthcare Management", credits: 4 }] },
+  { id: "healthcare-ops", name: "Healthcare System Operations", college: "COE", totalCredits: 16, requirements: [{ code: "IE 5617", name: "Lean Concepts and Applications", credits: 4 }, { code: "IE 5400", name: "Healthcare Systems Modeling and Analysis", credits: 4 }, { code: "PHTH 1260", name: "The American Healthcare System", credits: 4 }, { code: "PHTH 4511", name: "Healthcare Management", credits: 4 }] },
   { id: "health-hum-soc", name: "Health, Humanities, and Society", college: "Bouvé", totalCredits: 20, requirements: [{ code: "HLTH 1205", name: "Wellness", credits: 4 }, { code: "PHIL 2325", name: "Ethics", credits: 4 }, { code: "SOCL 1101", name: "Introduction to Sociology", credits: 4 }, { code: "PHTH 1260", name: "The American Healthcare System", credits: 4 }, { code: "ANTH 3441", name: "Medical Anthropology", credits: 4 }] },
   { id: "health-psych", name: "Health Psychology", college: "Bouvé", totalCredits: 20, requirements: [{ code: "PSYC 1101", name: "Foundations of Psychology", credits: 4 }, { code: "CAEP 3480", name: "Counseling Theories and Practice", credits: 4 }, { code: "PHTH 2350", name: "Community and Public Health", credits: 4 }, { code: "PSYC 3402", name: "Social Psychology", credits: 4 }, { code: "PSYC 3458", name: "Biological Psychology", credits: 4 }] },
   { id: "human-movement", name: "Human Movement Science", college: "Bouvé", totalCredits: 16, requirements: [{ code: "PT 3300", name: "Human Gross Anatomy", credits: 3 }, { code: "PT 3301", name: "Lab for Human Gross Anatomy", credits: 1 }, { code: "PT 3400", name: "Human Kinesiology", credits: 4 }, { code: "PT 3500", name: "Motor Control of Human Movement", credits: 4 }, { code: "PT 1880", name: "Introduction to Sports Medicine", credits: 4 }] },
@@ -162,6 +162,19 @@ const NU_MINORS = [
   { id: "public-health", name: "Public Health", college: "Bouvé", totalCredits: 18, requirements: [{ code: "PHTH 1260", name: "The American Healthcare System", credits: 4 }, { code: "PHTH 2350", name: "Community and Public Health", credits: 4 }, { code: "PHTH 2210", name: "Foundations of Biostatistics", credits: 4 }, { code: "PHTH 2515", name: "Social Determinants of Health", credits: 4 }, { code: "PHTH 2414", name: "Environmental Health", credits: 4 }] },
   { id: "slpa-minor", name: "Speech-Language Pathology and Audiology", college: "Bouvé", totalCredits: 20, requirements: [{ code: "SLPA 1102", name: "Language Development", credits: 4 }, { code: "SLPA 1103", name: "Anatomy and Physiology of Speech and Hearing", credits: 4 }, { code: "SLPA 1200", name: "Phonetics", credits: 4 }, { code: "SLPA 1203", name: "Introduction to Audiology", credits: 4 }, { code: "SLPA 1205", name: "Speech and Hearing Science", credits: 4 }] },
   { id: "wellness", name: "Wellness Studies", college: "Bouvé", totalCredits: 15, requirements: [{ code: "HLTH 1205", name: "Wellness", credits: 4 }, { code: "NRSG 5000", name: "Advanced Perspectives in Wellness", credits: 4 }, { code: "EXSC 1120", name: "Introduction to Exercise, Fitness, and Health", credits: 4 }, { code: "HSCI 1105", name: "Human Nutrition", credits: 4 }] },
+  // Added from the 2025–26 / 2026–27 Northeastern catalog and Bouvé program pages.
+  { id: "health-equity", name: "Health Equity", college: "Bouvé", totalCredits: 16, requirements: [{ code: "PHTH 2350", name: "Community in Public Health", credits: 4, alts: ["PHTH 2351"] }, { code: "HLTH 5311", name: "Advancing Health Literacy Through Communication", credits: 4 }, { code: "HLTH 5320", name: "Health Equity and Justice in Action in the Health Professions", credits: 4 }, { code: "Elective", name: "Health equity elective (choose 1 of 8)", credits: 4, alts: ["CAEP 5879", "HLTH 5280", "HLTH 5700", "INMI 1877", "INMI 2127", "PHTH 4120", "SOCL 1225", "SUST 2820"] }] },
+  { id: "ethnomusicology", name: "Ethnomusicology", college: "CAMD", totalCredits: 16, requirements: [{ code: "MUSC 1001", name: "Music in Everyday Life", credits: 4 }, { code: "MUSC 2330", name: "Musical Communities of Boston", credits: 4 }, { code: "Elective", name: "Ethnomusicology elective (choose 2 of 11)", credits: 4, alts: ["MUSC 2101", "MUSC 2313", "MUSC 2331", "MUSC 2336", "MUSC 3353", "MUSC 3354", "MUSC 3355", "MUSI 3210", "MUSI 3351", "MUSI 3360", "MUSI 3401"] }, { code: "Elective", name: "Ethnomusicology elective (choose 2 of 11)", credits: 4, alts: ["MUSC 2101", "MUSC 2313", "MUSC 2331", "MUSC 2336", "MUSC 3353", "MUSC 3354", "MUSC 3355", "MUSI 3210", "MUSI 3351", "MUSI 3360", "MUSI 3401"] }] },
+  { id: "music-composition", name: "Music Composition", college: "CAMD", totalCredits: 20, requirements: [{ code: "MUSC 1001", name: "Music in Everyday Life", credits: 4, alts: ["MUSC 1002"] }, { code: "MUSC 1201", name: "Music Theory 1", credits: 4 }, { code: "MUSC 1301", name: "Introduction to Music Composition", credits: 4, alts: ["MUSC 2420"] }, { code: "Elective", name: "Composition elective (choose 2 of 10)", credits: 4, alts: ["MUSC 1202", "MUSC 1204", "MUSC 2150", "MUSC 2208", "MUSC 2420", "MUSC 2425", "MUSC 3541", "MUST 1220", "MUST 2102", "MUST 2320"] }, { code: "Elective", name: "Composition elective (choose 2 of 10)", credits: 4, alts: ["MUSC 1202", "MUSC 1204", "MUSC 2150", "MUSC 2208", "MUSC 2420", "MUSC 2425", "MUSC 3541", "MUST 1220", "MUST 2102", "MUST 2320"] }] },
+  { id: "music-recording", name: "Music Recording", college: "CAMD", totalCredits: 16, requirements: [{ code: "MUSI 2232", name: "Music Production and Recording 1", credits: 4 }, { code: "MUSI 2331", name: "Music Production and Recording 2", credits: 4 }, { code: "MUSI 3341", name: "Music Production and Recording 3", credits: 4 }, { code: "Elective", name: "Recording elective (choose 1 of 8)", credits: 4, alts: ["MUSC 1001", "MUSC 1002", "MUSC 2210", "MUSC 3342", "MUSI 1230", "MUSI 2341", "MUSI 3333", "MUST 2320"] }] },
+  { id: "songwriting", name: "Songwriting", college: "CAMD", totalCredits: 16, requirements: [{ code: "MUSC 1119", name: "Music theory (MUSC 1119, 1201, or 1204)", credits: 4, alts: ["MUSC 1201", "MUSC 1204"] }, { code: "MUSC 2210", name: "Introduction to Songwriting", credits: 4 }, { code: "Elective", name: "Songwriting elective (choose 2 of 9)", credits: 4, alts: ["MUSC 1001", "MUSC 2105", "MUSC 2150", "MUSC 2211", "MUSI 2101", "MUSI 2232", "MUSI 2235", "MUSI 2331", "MUSI 5220"] }, { code: "Elective", name: "Songwriting elective (choose 2 of 9)", credits: 4, alts: ["MUSC 1001", "MUSC 2105", "MUSC 2150", "MUSC 2211", "MUSI 2101", "MUSI 2232", "MUSI 2235", "MUSI 2331", "MUSI 5220"] }] },
+  { id: "journalism-practice", name: "Journalism Practice", college: "CAMD", totalCredits: 17, requirements: [{ code: "JRNL 1101", name: "Journalism 1 (with JRNL 1102 Journalist’s Toolbox)", credits: 5 }, { code: "JRNL 2201", name: "Journalism 2: Intermediate Reporting", credits: 4 }, { code: "Elective", name: "Restricted journalism elective (choose 1 of 13)", credits: 4, alts: ["JRNL 3370", "JRNL 3610", "JRNL 3630", "JRNL 3650", "JRNL 3680", "JRNL 3700", "JRNL 5309", "JRNL 5310", "JRNL 5311", "JRNL 5314", "JRNL 5360", "JRNL 5460", "JRNL 5500"] }, { code: "Elective", name: "Any additional JRNL course", credits: 4, alts: ["JRNL*"] }] },
+  { id: "journalism-studies", name: "Journalism Studies", college: "CAMD", totalCredits: 16, requirements: [{ code: "JRNL 1150", name: "Understanding Today’s News", credits: 4 }, { code: "JRNL 2350", name: "The History of Journalism", credits: 4 }, { code: "JRNL 3550", name: "The First Amendment and the Media", credits: 4 }, { code: "Elective", name: "Any JRNL course", credits: 4, alts: ["JRNL*"] }] },
+  { id: "photojournalism", name: "Photojournalism", college: "CAMD", totalCredits: 16, requirements: [{ code: "ARTD 2360", name: "Introduction to Photography (with ARTD 2361), or ARTE 2500", credits: 4, alts: ["ARTE 2500"] }, { code: "ARTD 3460", name: "Photography: Concept + Process", credits: 4 }, { code: "JRNL 5310", name: "Photojournalism", credits: 4 }, { code: "Elective", name: "Photojournalism elective (choose 1 of 2)", credits: 4, alts: ["JRNL 2301", "JRNL 5314"] }] },
+  { id: "public-relations", name: "Public Relations", college: "CAMD", totalCredits: 17, requirements: [{ code: "JRNL 1101", name: "Journalism 1 (with JRNL 1102 Journalist’s Toolbox)", credits: 5 }, { code: "PREL 1425", name: "Public Relations Principles", credits: 4 }, { code: "Elective", name: "Restricted elective (choose 1 of 2)", credits: 4, alts: ["JRNL 5400", "JRNL 5480"] }, { code: "Elective", name: "Any additional JRNL or PREL course", credits: 4, alts: ["JRNL*", "PREL*"] }] },
+  { id: "playwriting", name: "Playwriting", college: "CAMD", totalCredits: 16, requirements: [{ code: "THTR 1101", name: "Introduction to Theatre", credits: 4 }, { code: "THTR 2330", name: "Playwriting", credits: 4 }, { code: "Elective", name: "Playwriting elective (choose 2 of 13)", credits: 4, alts: ["COMM 1511", "ENGL 1600", "INAM 1300", "INAM 2000", "MSCR 3389", "THTR 1400", "THTR 2200", "THTR 2335", "THTR 2500", "THTR 3100", "THTR 3200", "THTR 3325", "THTR 5300"] }, { code: "Elective", name: "Playwriting elective (choose 2 of 13)", credits: 4, alts: ["COMM 1511", "ENGL 1600", "INAM 1300", "INAM 2000", "MSCR 3389", "THTR 1400", "THTR 2200", "THTR 2335", "THTR 2500", "THTR 3100", "THTR 3200", "THTR 3325", "THTR 5300"] }] },
+  { id: "global-fashion", name: "Global Fashion Studies", college: "CAMD", totalCredits: 16, requirements: [{ code: "THTR 1236", name: "Introduction to Global Fashion Studies", credits: 4, alts: ["THTR 1237"] }, { code: "Elective", name: "Fashion elective (choose 2 of 7)", credits: 4, alts: ["THTR 1230", "THTR 1233", "THTR 1235", "THTR 1240", "THTR 2242", "THTR 2385", "THTR 3350"] }, { code: "Elective", name: "Fashion elective (choose 2 of 7)", credits: 4, alts: ["THTR 1230", "THTR 1233", "THTR 1235", "THTR 1240", "THTR 2242", "THTR 2385", "THTR 3350"] }, { code: "Elective", name: "Fashion or related elective (choose 1)", credits: 4, alts: ["THTR 1230", "THTR 1233", "THTR 1235", "THTR 1240", "THTR 2242", "THTR 2385", "THTR 3350", "ARTD 2360", "ARTG 1270", "ARTG 2262", "COMM 3445", "COMM 3451", "JRNL 5310", "PREL 1425", "THTR 2380"] }] },
+  { id: "urban-landscape", name: "Urban Landscape Studies", college: "CAMD", totalCredits: 16, requirements: [{ code: "LARC 2340", name: "Cities, Landscape, and Contemporary Culture", credits: 4 }, { code: "Elective", name: "Urban landscape core (choose 2 of 3)", credits: 4, alts: ["LARC 2230", "LARC 2330", "LARC 2430"] }, { code: "Elective", name: "Urban landscape core (choose 2 of 3)", credits: 4, alts: ["LARC 2230", "LARC 2330", "LARC 2430"] }, { code: "Elective", name: "Urban landscape elective (choose 1 of 14)", credits: 4, alts: ["ARCH 1310", "ARCH 3352", "ARCH 4850", "CIVE 2334", "ENVR 1200", "ENVR 3200", "LARC 2230", "LARC 2240", "LARC 2330", "LARC 2430", "LARC 2440", "LARC 5210", "POLS 2395", "SOCL 1246"] }] },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -189,23 +202,53 @@ const parseJSON = str => {
 const normalizeCode = s =>
   s.toUpperCase().replace(/\s+/g, "").replace(/H$/, "").replace(/\.\d+$/, "").trim();
 
-// Northeastern rule: at most 50% of a minor's courses can also count toward
-// the student's major or other degree requirements.
+// Northeastern rule: at most 50% of the credits required for a minor can be
+// double counted from the major (or transfer / advanced standing credit).
 const MAX_OVERLAP_SHARE = 0.5;
+
+// A requirement can be one course, one course with alternatives ("alts"), or an
+// elective slot that any listed course satisfies. "JRNL*" means any JRNL course.
+const optionsOf = r => [r.code, ...(r.alts || [])];
+const RANGE = /^([A-Z]+)\s*(\d{4})-(\d{4})$/;
+const optionMatches = (opt, code) => {
+  if (opt.endsWith("*")) return code.startsWith(normalizeCode(opt.slice(0, -1)));
+  const range = opt.match(RANGE);
+  if (range) {
+    const m = code.match(/^([A-Z]+)(\d{4})$/);
+    return !!m && m[1] === range[1] && +m[2] >= +range[2] && +m[2] <= +range[3];
+  }
+  return normalizeCode(opt) === code;
+};
+// Fill the most specific requirements first so a course isn't spent on a broad
+// elective slot when a required course needed it.
+const specificity = r => !r.alts ? 0 : r.alts.some(a => a.endsWith("*") || RANGE.test(a)) ? 2 : 1;
 
 const computeOverlap = (codes, minor) => {
   const done = codes.map(normalizeCode);
-  const allMatched = minor.requirements.filter(r => done.includes(normalizeCode(r.code)));
-  const cap = Math.floor(minor.requirements.length * MAX_OVERLAP_SHARE);
-  // Apply the highest-credit matches first so the student gets the most credit the rule allows.
+  const original = new Map(codes.map(c => [normalizeCode(c), c]));
+  const taken = new Set();
+  const satisfiedBy = new Map();
+  [...minor.requirements].sort((a, b) => specificity(a) - specificity(b)).forEach(r => {
+    const hit = done.find(c => !taken.has(c) && optionsOf(r).some(o => optionMatches(o, c)));
+    if (hit) { taken.add(hit); satisfiedBy.set(r, original.get(hit)); }
+  });
+  const allMatched = minor.requirements.filter(r => satisfiedBy.has(r));
+  const capCredits = minor.totalCredits * MAX_OVERLAP_SHARE;
+  // Apply the highest-credit matches first, skipping any course that would push
+  // the total past the cap, so the student gets as much credit as the rule allows.
   const ranked = [...allMatched].sort((a, b) => b.credits - a.credits);
-  const matched = ranked.slice(0, cap);
-  const overLimit = ranked.slice(cap);
-  const matchedCredits = matched.reduce((s, r) => s + r.credits, 0);
+  const matched = [];
+  const overLimit = [];
+  let used = 0;
+  for (const r of ranked) {
+    if (used + r.credits <= capCredits) { matched.push(r); used += r.credits; }
+    else overLimit.push(r);
+  }
+  const matchedCredits = used;
   const remaining = minor.requirements.filter(r => !matched.includes(r));
   const remainingCredits = remaining.reduce((s, r) => s + r.credits, 0);
   const pct = Math.round((matchedCredits / minor.totalCredits) * 100);
-  return { matched, matchedCredits, remaining, remainingCredits, pct, overLimit, cap };
+  return { matched, matchedCredits, remaining, remainingCredits, pct, overLimit, capCredits, satisfiedBy };
 };
 
 // ─── Styles ────────────────────────────────────────────────────────────────
@@ -219,9 +262,9 @@ const STYLES = `
 .nw *{box-sizing:border-box}
 :where(.nw) button{font-family:inherit;font-size:inherit;line-height:inherit;color:inherit;cursor:pointer}
 .nw :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.wrap{max-width:1200px;margin:0 auto;padding:40px 20px 64px}
+.wrap{max-width:780px;margin:0 auto;padding:40px 20px 64px}
 .top{background:var(--surface);border-bottom:1px solid var(--line)}
-.top-in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top-in{max-width:780px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .mark{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;font-weight:800;font-size:20px;letter-spacing:-.01em}
 .navlink{background:none;border:0;padding:6px 2px;margin-left:18px;color:var(--muted);font-weight:600;border-bottom:3px solid transparent}
 .navlink:hover{color:var(--ink)}
@@ -268,6 +311,12 @@ textarea.field{height:160px;resize:vertical;font-size:13px;line-height:1.45}
 .row-name{font-weight:800;font-size:17px}
 .rank{color:var(--muted);font-weight:600;margin-right:8px;font-variant-numeric:tabular-nums}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:4px 0 12px}
+.seg button{font:inherit;font-size:14px;font-weight:700;padding:8px 14px;border:0;background:var(--surface);color:var(--muted);cursor:pointer}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--route-soft);color:var(--route)}
+.seg button:disabled{cursor:not-allowed;opacity:.5}
+.seg button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
 .pct{font-size:26px;font-weight:800;line-height:1;text-align:right;font-variant-numeric:tabular-nums}
 .pct small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:4px}
 .credits{font-size:14px;color:var(--muted);margin-top:2px}
@@ -337,7 +386,7 @@ const Route = ({ requirements, isDone, isOver = () => false }) => {
   return (
     <div className="route" role="img" aria-label={`${doneCount} of ${stops.length} required courses completed`}>
       <div className="route-fill" style={{ width: `${fill}%` }} />
-      {stops.map(r => <span key={r.code} className={`stop ${isDone(r) ? "done" : isOver(r) ? "over" : ""}`} title={`${r.code} ${r.name}`} />)}
+      {stops.map((r, i) => <span key={i} className={`stop ${isDone(r) ? "done" : isOver(r) ? "over" : ""}`} title={`${r.code} ${r.name}`} />)}
     </div>
   );
 };
@@ -357,14 +406,14 @@ const Nav = ({ page, setPage }) => (
 
 // ─── Home Page ─────────────────────────────────────────────────────────────
 const SAMPLE = {
-  name: "Data Science",
+  name: "Mathematics",
   requirements: [
-    { code: "CS 2500", name: "Fundamentals of CS 1", done: true },
-    { code: "DS 2000", name: "Programming with Data", done: true },
-    { code: "MATH 2280", name: "Statistics & Software", done: true },
-    { code: "DS 2001", name: "Programming with Data Practicum", done: false },
-    { code: "DS 3000", name: "Foundations of Data Science", done: false },
-    { code: "DS 4200", name: "Information Presentation & Visualization", done: false },
+    { code: "MATH 1341", name: "Calculus 1 for Science and Engineering", done: true },
+    { code: "MATH 1342", name: "Calculus 2 for Science and Engineering", done: true },
+    { code: "MATH 2331", name: "Linear Algebra", done: true },
+    { code: "MATH 2321", name: "Calculus 3 for Science and Engineering", done: false },
+    { code: "MATH 3001–4699", name: "Mathematics elective", done: false },
+    { code: "MATH 3001–4699", name: "Mathematics elective", done: false },
   ],
 };
 
@@ -419,12 +468,16 @@ const HomePage = ({ setPage }) => (
 );
 
 // ─── Minor Finder Page ─────────────────────────────────────────────────────
-const MinorCard = ({ minor, overlap, rank, aiSummary }) => {
+// Highest interest score first; ties go to the minor with more credit overlap.
+const sortByInterest = rows =>
+  [...rows].sort((a, b) => (b.relevance ?? -1) - (a.relevance ?? -1) || b.overlap.pct - a.overlap.pct);
+
+const MinorCard = ({ minor, overlap, rank, aiSummary, relevance }) => {
   const [expanded, setExpanded] = useState(false);
   const tone = overlap.pct >= 60 ? "green" : overlap.pct >= 30 ? "amber" : "";
   const fitLabel = overlap.pct >= 60 ? "Great fit" : overlap.pct >= 30 ? "Good fit" : "Some overlap";
-  const isDone = r => overlap.matched.some(m => normalizeCode(m.code) === normalizeCode(r.code));
-  const isOver = r => overlap.overLimit.some(m => normalizeCode(m.code) === normalizeCode(r.code));
+  const isDone = r => overlap.matched.includes(r);
+  const isOver = r => overlap.overLimit.includes(r);
   const rankOf = r => isDone(r) ? 2 : isOver(r) ? 1 : 0;
   const sorted = [...minor.requirements].sort((a, b) => rankOf(b) - rankOf(a));
   return (
@@ -433,21 +486,21 @@ const MinorCard = ({ minor, overlap, rank, aiSummary }) => {
         <div className="row-top">
           <div>
             <span className="rank">{rank}</span><span className="row-name">{minor.name}</span>
-            <div className="tags"><span className="tag">{minor.college}</span><span className={`tag ${tone}`}>{fitLabel}</span></div>
+            <div className="tags"><span className="tag">{minor.college}</span><span className={`tag ${tone}`}>{fitLabel}</span>{relevance >= 7 && <span className="tag blue">Matches your interests</span>}</div>
           </div>
           <div className="pct">{overlap.pct}%<small>overlap</small></div>
         </div>
         <Route requirements={minor.requirements} isDone={isDone} isOver={isOver} />
         <div className="credits">{overlap.matchedCredits} credits done, {overlap.remainingCredits} to go, {minor.totalCredits} total</div>
-        {overlap.overLimit.length > 0 && <div className="credits">Overlap limit applied: {overlap.cap} of your {overlap.cap + overlap.overLimit.length} matching courses can count toward this minor.</div>}
+        {overlap.overLimit.length > 0 && <div className="credits">Overlap limit applied: up to {overlap.capCredits} of this minor’s {minor.totalCredits} credits can come from your major, so {overlap.overLimit.length} matching {overlap.overLimit.length === 1 ? "course doesn’t" : "courses don’t"} count.</div>}
         {aiSummary && <p className="why">{aiSummary}</p>}
         <span className="toggle">{expanded ? "Hide courses" : "Show courses"}</span>
       </button>
       {expanded && (
         <ul className="stoplist">
-          {sorted.map(r => (
-            <li key={r.code} className={isDone(r) ? "done" : isOver(r) ? "over" : ""}>
-              <span><span className="code">{r.code}</span>{r.name}{isOver(r) && <span className="over-note"> (taken, but over the 50% overlap limit)</span>}</span>
+          {sorted.map((r, i) => (
+            <li key={i} className={isDone(r) ? "done" : isOver(r) ? "over" : ""}>
+              <span><span className="code">{overlap.satisfiedBy.get(r) || r.code}</span>{r.name}{isOver(r) && <span className="over-note"> (taken, but over the 50% overlap limit)</span>}</span>
               <span>{r.credits} cr</span>
             </li>
           ))}
@@ -462,6 +515,8 @@ const MinorFinderPage = () => {
   const [careerInterests, setCareerInterests] = useState("");
   const [parsedData, setParsedData] = useState(null);
   const [minorResults, setMinorResults] = useState([]);
+  const [sortMode, setSortMode] = useState("credits");
+  const [interestsUsed, setInterestsUsed] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState("");
   const [error, setError] = useState("");
@@ -528,29 +583,54 @@ ${auditText.slice(0, 15000)}` }]);
       const home = norm(parsed.homeCollege);
       const ALIASES = { khoury: ["khoury","computerscience","computersci"], cos: ["cos","collegeofscience","scienc"], dmore: ["damore","damoremckim","business","dmsb"], cssh: ["cssh","socialscience","humanit","socialsci"], bouv: ["bouv","bouve","healthsci","healthscience"], camd: ["camd","artsmedia","artsmediadesign","artsmed"], coe: ["coe","engineering","collegeofengineering"] };
       const MINOR_MAP = { "Khoury": "khoury", "COS": "cos", "D'Amore-McKim": "dmore", "CSSH": "cssh", "Bouvé": "bouv", "CAMD": "camd", "COE": "coe" };
-      // Note: Healthcare System Operations is housed in COE but listed as Bouvé-adjacent — keep it visible for Bouvé students
-      let studentKey = null;
+          let studentKey = null;
       for (const [key, aliases] of Object.entries(ALIASES)) {
         if (aliases.some(a => home.includes(a) || a.includes(home.slice(0, 6)))) { studentKey = key; break; }
       }
-      const eligible = NU_MINORS.filter(m => !studentKey || MINOR_MAP[m.college] !== studentKey);
+      const majorText = (parsed.major || "").toLowerCase();
+      const eligible = NU_MINORS.filter(m =>
+        (!studentKey || MINOR_MAP[m.college] !== studentKey) &&
+        !(m.restrictedMajors || []).some(word => majorText.includes(word)));
       const overlaps = eligible.map(minor => ({ minor, overlap: computeOverlap(allCodes, minor) })).sort((a, b) => b.overlap.pct - a.overlap.pct);
 
+      // Interest fit is a judgment call, so Claude scores it; credit overlap stays deterministic.
+      const interests = careerInterests.trim();
+      let relevance = {};
+      if (interests) {
+        setLoadingMsg("Matching minors to your interests...");
+        const relResp = await callClaude([{ role: "user", content: `A student is interested in: ${interests}.
+
+Rate how relevant each minor's subject is to these interests, from 0 (unrelated) to 10 (directly relevant). Judge only the subject, not the student's progress.
+
+Minors:
+${overlaps.map(r => `${r.minor.id}: ${r.minor.name}`).join("\n")}
+
+Return ONLY a JSON object mapping each id to a number, for example {"biochem": 8}` }]);
+        try { const m = relResp.replace(/```json|```/gi, "").match(/\{[\s\S]*\}/); relevance = m ? JSON.parse(m[0]) : {}; } catch { relevance = {}; }
+      }
+      const withRelevance = overlaps.map(r => ({ ...r, relevance: typeof relevance[r.minor.id] === "number" ? relevance[r.minor.id] : null }));
+      const hasRelevance = withRelevance.some(r => r.relevance !== null);
+
+      // Write recommendations for the top 5 in each ordering, so both views have them.
       setLoadingMsg("Generating AI recommendations...");
-      const top5 = overlaps.slice(0, 5);
-      const careerCtx = careerInterests.trim() ? `Career interests: ${careerInterests.trim()}.` : "";
+      const featured = [...withRelevance.slice(0, 5), ...(hasRelevance ? sortByInterest(withRelevance).slice(0, 5) : [])]
+        .filter((r, i, arr) => arr.indexOf(r) === i);
+      const careerCtx = interests ? `Career interests: ${interests}.` : "";
       const summaryResp = await callClaude([{ role: "user", content: `A Northeastern student majoring in ${parsed.major} has completed ${parsed.totalCredits} credits. Courses: ${allCodes.slice(0, 20).join(", ")}. ${careerCtx}
 
 For each minor, write a 1-sentence recommendation factoring in their background and career interests if provided.
 
 Minors:
-${top5.map((r, i) => `${i + 1}. ${r.minor.name} (${r.overlap.pct}% overlap, ${r.overlap.remainingCredits} cr needed)`).join("\n")}
+${featured.map((r, i) => `${i + 1}. ${r.minor.name} (${r.overlap.pct}% overlap, ${r.overlap.remainingCredits} cr needed)`).join("\n")}
 
-Return ONLY a JSON array: ["reason1","reason2","reason3","reason4","reason5"]` }]);
+Return ONLY a JSON array of ${featured.length} strings, in the same order.` }]);
 
       let summaries = [];
       try { const m = summaryResp.replace(/```json|```/gi, "").trim().match(/\[[\s\S]*\]/); summaries = m ? JSON.parse(m[0]) : []; } catch { summaries = []; }
-      setMinorResults(overlaps.map((r, i) => ({ ...r, aiSummary: i < 5 ? summaries[i] || "" : "" })));
+      const summaryFor = new Map(featured.map((r, i) => [r.minor, summaries[i] || ""]));
+      setMinorResults(withRelevance.map(r => ({ ...r, aiSummary: summaryFor.get(r.minor) || "" })));
+      setInterestsUsed(hasRelevance ? interests : "");
+      setSortMode("credits");
     } catch (err) { setError(err.message || "Something went wrong."); }
     setLoading(false); setLoadingMsg("");
   };
@@ -596,10 +676,15 @@ Return ONLY a JSON array: ["reason1","reason2","reason3","reason4","reason5"]` }
 
       {minorResults.length > 0 && (
         <section>
-          <h2 className="sec">Minors ranked by credit overlap</h2>
-          <p className="sub" style={{ marginBottom: 12 }}>Filled stops are courses that count toward the minor. Dashed stops are courses you’ve taken that can’t count, because at most 50% of a minor’s courses can overlap with your major. Select a minor to see its courses.</p>
+          <h2 className="sec">{sortMode === "interests" ? "Minors ranked by fit with your interests" : "Minors ranked by credit overlap"}</h2>
+          <div className="seg" role="group" aria-label="Sort minors">
+            <button type="button" aria-pressed={sortMode === "credits"} onClick={() => setSortMode("credits")}>Most credit overlap</button>
+            <button type="button" aria-pressed={sortMode === "interests"} disabled={!interestsUsed} onClick={() => setSortMode("interests")}>Best match for your interests</button>
+          </div>
+          {!interestsUsed && <p className="hint" style={{ marginBottom: 12 }}>Add career interests above and analyze again to sort by them.</p>}
+          <p className="sub" style={{ marginBottom: 12 }}>Filled stops are courses that count toward the minor. Dashed stops are courses you’ve taken that can’t count, because at most 50% of a minor’s credits can be double counted from your major. Select a minor to see its courses.</p>
           <div className="rows">
-            {minorResults.map((r, i) => <MinorCard key={r.minor.id} rank={i + 1} minor={r.minor} overlap={r.overlap} aiSummary={r.aiSummary} />)}
+            {(sortMode === "interests" ? sortByInterest(minorResults) : minorResults).map((r, i) => <MinorCard key={`${r.minor.id}-${r.minor.college}`} rank={i + 1} minor={r.minor} overlap={r.overlap} aiSummary={r.aiSummary} relevance={r.relevance} />)}
           </div>
         </section>
       )}
